@@ -1,1 +1,1 @@
-# basic-web-eeg-boiler-plate
+# BCI Electron BLE Application
