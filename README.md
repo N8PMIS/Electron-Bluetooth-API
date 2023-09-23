@@ -1,1 +1,1 @@
-"# Electron-Bluetooth-API" 
+# basic-web-eeg-boiler-plate

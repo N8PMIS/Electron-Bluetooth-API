@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NeuroScope</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <h1>NeuroScope</h1>
+  </body>
+
+  <form>
+    <button id="ble-button">Connect to BCI Device</button>
+  </form>
+
+  <!--Button and Bluetooth Connection Script-->
+  <script>
+    function isWebBLEAvailable() {
+      console.log("Web BLE available?")
+      if (!navigator.bluetooth) {
+        console.log("BLE Unavailable")
+        return false;
+      } else {
+        console.log("Web BLE available.")
+        return true;
+      }
+    }
+
+    function getDeviceInfo() {
+      console.log("Getting device info...")
+      let options = {
+        acceptAllDevices: true,
+        
+        //filters: [
+          //{ services: ["heart_rate"] },
+          //{ services: [0x1802, 0x1803] },
+          //{ services: ["c48e6067-5295-48d3-8d5c-0395f61792b1"] },
+          //{ name: "ExampleName" },
+          //{ namePrefix: "Prefix" },
+        //],
+      };
+
+      console.log('Requesting Bluetooth Device...')
+      navigator.bluetooth.requestDevice(options)
+        .then(device => {
+          console.log('> Name: ' + device.name)
+          console.log('> Id: ' + device.id)
+          console.log('> Connected: ' + device.gatt.connected)
+        })
+    }
+
+    document.getElementById("ble-button").addEventListener('click', function(event) {
+      console.log("Button...")
+      event.stopPropagation()
+      event.preventDefault()
+
+      if (isWebBLEAvailable()) {
+        console.log("Web BLE is available")
+        getDeviceInfo()
+        console.log("Device info retrieved")
+      }
+
+      console.log("...clicked.")
+    });
+  </script>
+
+  <!-- NeuroScope -->
+  <script type="text/javascript" src="./js/BCIDevice.build.js"></script>
+  <script src="./js/d3js.min.js"></script>
+  <script src="./js/rickshaw.min.js"></script>
+  <script type="module" src="./js/core/index.js"></script>
+  <script type="text/javascript" src="js/physio.js"></script>
+
+  <!-- Extras? (Given to me commented)  -->
+  <script src="js/fili.min.js"></script>
+  <script type="text/javascript" src="js/physio.js"></script>
+  <script type="text/javascript" src="js/bci.min.js"></script>
+  <script type="text/javascript" src="js/BCIDevice.build.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+
+
+</html>
